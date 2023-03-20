@@ -26,10 +26,10 @@
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
         <Border x:Name="BorderLeft" Visibility="Hidden" CornerRadius="20 0 0 20" Grid.Column="0" Background="#9E30C5" IsVisibleChanged="BorderLeft_IsVisibleChanged">
-            <Frame Content="{Binding PageSource}" NavigationUIVisibility="Hidden" Style="{DynamicResource FrameStyle1}"/>
+            <Frame x:Name="FramePage" Content="{Binding PageSource}" NavigationUIVisibility="Hidden"/>
         </Border>
         <Border x:Name="BorderRight" CornerRadius="20" Grid.Column="1" Background="White">
-            <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="310" Width="420"/>
+            <Calendar SelectedDate="{Binding SelectDate}" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="302" Width="420"/>
         </Border>
         <Button x:Name="HideVisBorderButton" Foreground="#9E30C5" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" Click="HideVisBorderButton_Click">
             <Grid>

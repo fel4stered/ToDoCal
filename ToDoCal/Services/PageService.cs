@@ -11,5 +11,6 @@ namespace ToDoCal.Services
     {
         public event Action<Page> onPageChanged;
         public void ChangePage(Page page) => onPageChanged?.Invoke(page);
-    }
+        public DateTime SelectDate { get; set; }
+}
 }

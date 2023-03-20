@@ -19,11 +19,16 @@ namespace ToDoCal
             var services = new ServiceCollection();
 
             services.AddTransient<MainWindowViewModel>();
+            services.AddTransient<AllNotesViewModel>();
+            services.AddTransient<SelectedDateNotesViewModel>();
 
             services.AddSingleton<PageService>();
 
             _provider = services.BuildServiceProvider();
         }
         public MainWindowViewModel? MainWindowViewModel => _provider?.GetRequiredService<MainWindowViewModel>();
+        public AllNotesViewModel? AllNotesViewModel => _provider?.GetRequiredService<AllNotesViewModel>();
+        public SelectedDateNotesViewModel? SelectedDateNotesViewModel => _provider?.GetRequiredService<SelectedDateNotesViewModel>();
+
     }
 }
