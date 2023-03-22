@@ -408,9 +408,9 @@
     
     <!--#region ContextMenu -->
     <ControlTemplate TargetType="{x:Type MenuItem}" x:Key="MenuItemTemplate">
-        <Grid Width="100">
-            <Border x:Name="MenuItemBorder" Margin="2 2 2 2" CornerRadius="10 0 10 0" Background="#9E30C5" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <TextBlock Padding="5" Text="Выйти" Foreground="White" FontFamily="bahnschrift" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Grid Width="160">
+            <Border x:Name="MenuItemBorder" Margin="2 2 2 2" Width="100" CornerRadius="10 0 10 0" Background="#9E30C5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Padding="5" Text="{Binding Header, RelativeSource={RelativeSource AncestorType={x:Type MenuItem}}}" Foreground="White" FontFamily="bahnschrift" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Border>
         </Grid>
         <ControlTemplate.Triggers>
@@ -422,7 +422,7 @@
                                     Storyboard.TargetName="MenuItemBorder"
                                     Storyboard.TargetProperty="Width"
                                     RepeatBehavior="1x"
-                                    From="50" To="80" Duration="0:0:0.5"/>
+                                    From="100" To="120" Duration="0:0:0.5"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -433,7 +433,7 @@
                                     Storyboard.TargetName="MenuItemBorder"
                                     Storyboard.TargetProperty="Width"
                                     RepeatBehavior="1x"
-                                    From="80" To="50" Duration="0:0:0.5"/>
+                                    From="120" To="100" Duration="0:0:0.5"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
