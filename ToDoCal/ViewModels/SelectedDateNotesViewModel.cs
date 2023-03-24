@@ -11,7 +11,7 @@ namespace ToDoCal.ViewModels
     public class SelectedDateNotesViewModel : BindableBase
     {
         public DateTime SelectDate { get; set; }
-        public string SelectDateFormater { get { return SelectDate.ToShortDateString(); } set { SelectDateFormater = value; } }
+        public string SelectDateFormater { get { return SelectDate.ToLongDateString(); } set { SelectDateFormater = value; } }
         private readonly PageService _pageService;
 
         public SelectedDateNotesViewModel(PageService pageService)

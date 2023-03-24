@@ -1,6 +1,8 @@
 ﻿using DevExpress.Mvvm;
+using DevExpress.Mvvm.ModuleInjection;
 using System;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ToDoCal.Services;
 using ToDoCal.Views.Pages;
 
