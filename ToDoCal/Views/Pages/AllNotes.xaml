@@ -35,16 +35,16 @@
                 <ComboBoxItem>Выполнено</ComboBoxItem>
                 <ComboBoxItem>Брошено</ComboBoxItem>
             </ComboBox>
-            <ListView Style="{DynamicResource ListViewStyle1}" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
+            <ListView Style="{DynamicResource ListViewStyle1}" MouseDoubleClick="ListView_MouseDoubleClick" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
                 <ListView.ContextMenu>
                     <ContextMenu Style="{StaticResource ContextMenuStyle}">
-                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Редактировать"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="В процессе"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Выполнено"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Брошено"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Удалить"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
+                <ListViewItem>ИТЕМ 1</ListViewItem>
             </ListView>
             <Button x:Name="HideVisBorderButton" Command="{Binding AddNotePageCommand}" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Cursor="Hand">
                 <Grid>

@@ -23,6 +23,7 @@ namespace ToDoCal
             services.AddTransient<AllNotesViewModel>();
             services.AddTransient<SelectedDateNotesViewModel>();
             services.AddTransient<AddNoteViewModel>();
+            services.AddTransient<SelectedNoteViewModel>();
 
             services.AddSingleton<PageService>();
 
@@ -32,6 +33,7 @@ namespace ToDoCal
         public AllNotesViewModel? AllNotesViewModel => _provider?.GetRequiredService<AllNotesViewModel>();
         public SelectedDateNotesViewModel? SelectedDateNotesViewModel => _provider?.GetRequiredService<SelectedDateNotesViewModel>();
         public AddNoteViewModel? AddNoteViewModel => _provider?.GetRequiredService<AddNoteViewModel>();
+        public SelectedNoteViewModel? SelectedNoteViewModel => _provider?.GetRequiredService<SelectedNoteViewModel>();
 
     }
 }

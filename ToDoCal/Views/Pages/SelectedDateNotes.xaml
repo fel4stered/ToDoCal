@@ -37,7 +37,6 @@
             <ListView Style="{DynamicResource ListViewStyle1}" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
                 <ListView.ContextMenu>
                     <ContextMenu Style="{StaticResource ContextMenuStyle}">
-                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Редактировать"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="В процессе"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Выполнено"/>
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Брошено"/>

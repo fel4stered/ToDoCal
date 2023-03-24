@@ -27,7 +27,7 @@
                     <ComboBoxItem>Заметка</ComboBoxItem>
                     <ComboBoxItem>Задача</ComboBoxItem>
                 </ComboBox>
-
+                
                 <Button Command="{Binding AddNoteCommand}" Margin="0 10 0 0" Style="{StaticResource ButtonStyle}" Content="Добавить заметку"/>
             </StackPanel>
         </Grid>
