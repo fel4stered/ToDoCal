@@ -658,6 +658,19 @@
     </Style>
     <!--#endregion-->
 
+    <Style x:Key="ComboBoxHiddenTrigger" BasedOn="{StaticResource ComboBoxFlatStyle}" TargetType="ComboBox">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=TypeComboBox, Path=SelectedIndex}"
+                        Value="0">
+                <Setter Property="Visibility" Value="Hidden"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=TypeComboBox, Path=SelectedIndex}"
+                        Value="1">
+                <Setter Property="Visibility" Value="Hidden"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <!--#region TextBox -->
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Style.Setters>
