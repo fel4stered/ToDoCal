@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DevExpress.Mvvm;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace ToDoCal
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<AllNotesViewModel>();
             services.AddTransient<SelectedDateNotesViewModel>();
+            services.AddTransient<AddNoteViewModel>();
+            services.AddTransient<SelectedNoteViewModel>();
 
             services.AddSingleton<PageService>();
 
@@ -29,6 +32,8 @@ namespace ToDoCal
         public MainWindowViewModel? MainWindowViewModel => _provider?.GetRequiredService<MainWindowViewModel>();
         public AllNotesViewModel? AllNotesViewModel => _provider?.GetRequiredService<AllNotesViewModel>();
         public SelectedDateNotesViewModel? SelectedDateNotesViewModel => _provider?.GetRequiredService<SelectedDateNotesViewModel>();
+        public AddNoteViewModel? AddNoteViewModel => _provider?.GetRequiredService<AddNoteViewModel>();
+        public SelectedNoteViewModel? SelectedNoteViewModel => _provider?.GetRequiredService<SelectedNoteViewModel>();
 
     }
 }

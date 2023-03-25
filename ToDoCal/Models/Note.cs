@@ -45,15 +45,19 @@ namespace ToDoCal.Models
             notes.Remove(note);
             SaveNoteToFile(notes);
         }
-        public static void Edit_Note(Note note)
+        public static void Edit_Note(Note note,string titleNote, string descriptionNote, string dateNote, string statusNote)
         {
             List<Note> notes = GetNotesFromFile();
             foreach (Note note_Edit in notes)
             {
                 if (note_Edit.Id == note.Id)
                 {
-                    notes.Remove(note_Edit);
-                    notes.Add(note);
+
+                    note_Edit.Name = titleNote == null ? note_Edit.Name : titleNote;
+                    note_Edit.Description = descriptionNote == null ? note_Edit.Description : descriptionNote;
+                    note_Edit.Date = dateNote == null ? note_Edit.Date : dateNote;
+                    note_Edit.Stat_Task = statusNote == null ? note_Edit.Stat_Task : statusNote;
+
                 }
             }
             SaveNoteToFile(notes);

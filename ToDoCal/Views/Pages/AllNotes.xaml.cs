@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDoCal.ViewModels;
 
 namespace ToDoCal.Views.Pages
 {
@@ -23,6 +24,12 @@ namespace ToDoCal.Views.Pages
         public AllNotes()
         {
             InitializeComponent();
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vm = (AllNotesViewModel)this.DataContext;
+            vm.SelectedNotePageCommand.Execute(null);
         }
     }
 }
