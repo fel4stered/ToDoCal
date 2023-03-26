@@ -5,12 +5,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ToDoCal.Models;
 using ToDoCal.Services;
+using ToDoCal.Views;
+using ToDoCal.Views.Pages;
 
 namespace ToDoCal.ViewModels
 {
+
     public class AddNoteViewModel
     {
-       
+        private readonly PageService _pageService;
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string TypeNote { get; set; }
+        public AddNoteViewModel(PageService pageService)
+        {
+            _pageService = pageService;
+        }
+        public ICommand AddNote
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    Note note = new Note();
+                    note.Id = Note.Get_Id_To_New() + 1;
+                    note.Name = Title;
+                    note.Description = Description;
+                    note.Date = DateTime.Now.ToShortDateString();
+                    if(TypeNote == "Задача") 
+                    {
+                        note.Is_Task = true;
+                        note.Stat_Task = "В процессе";
+                    }
+                    else
+                    {
+                        note.Is_Task = false;
+                        
+                    }
+                    Note.SaveNoteToFile(note);
+                    _pageService.ChangePage(new AllNotes());
+                });
+            }
+        }
+
     }
 }

@@ -4,13 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Windows.Markup;
 using Newtonsoft.Json;
 
 namespace ToDoCal.Models
 {
     public class Note
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Date { get; set; }
@@ -19,7 +21,7 @@ namespace ToDoCal.Models
 
         public static List<Note> GetNotesFromFile()
         {
-            string filedata = File.ReadAllText(@"Data\task.json");
+            string filedata = File.ReadAllText(@"C:\Users\Viksy\Source\Repos\fel4stered\ToDoCal\ToDoCal\Data\task.json");
             List<Note> notes = JsonConvert.DeserializeObject<List<Note>>(filedata);
             return notes;
         }
@@ -29,14 +31,14 @@ namespace ToDoCal.Models
             List<Note>notes = GetNotesFromFile();
             notes.Add(note);
             string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(@"Data\task.json", SerializedNotes);
+            File.WriteAllText(@"C:\Users\Viksy\Source\Repos\fel4stered\ToDoCal\ToDoCal\Data\task.json", SerializedNotes);
 
         }
 
         public static void SaveNoteToFile(List<Note> notes)
         {
             string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(@"Data\task.json", SerializedNotes);
+            File.WriteAllText(@"C:\Users\Viksy\Source\Repos\fel4stered\ToDoCal\ToDoCal\Data\task.json", SerializedNotes);
 
         }
         public static void Delete_Note(Note note)
@@ -78,6 +80,21 @@ namespace ToDoCal.Models
                 return true;
             }
             else { return false; }
+        }
+        public static uint Get_Id_To_New()
+        {
+            uint count;
+            List<Note> notes = GetNotesFromFile();
+            if(notes.Count == 0)
+            {
+                count = 1;
+            }
+            else
+            {
+                count = (uint)notes[notes.Count - 1].Id;
+               
+            }
+            return count;
         }
     }
 }
