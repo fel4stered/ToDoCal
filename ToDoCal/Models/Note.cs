@@ -18,10 +18,11 @@ namespace ToDoCal.Models
         public string Date { get; set; }
         public bool Is_Task { get; set; } // Является ли задачей 
         public string Stat_Task { get; set; }
+        private static string path { get; set; } = @"Data/task.json";
 
         public static List<Note> GetNotesFromFile()
         {
-            string filedata = File.ReadAllText(@"C:\Users\Viksy\Source\Repos\fel4stered\ToDoCal\ToDoCal\Data\task.json");
+            string filedata = File.ReadAllText(path);
             List<Note> notes = JsonConvert.DeserializeObject<List<Note>>(filedata);
             return notes;
         }
@@ -31,14 +32,14 @@ namespace ToDoCal.Models
             List<Note>notes = GetNotesFromFile();
             notes.Add(note);
             string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(@"C:\Users\Viksy\Source\Repos\fel4stered\ToDoCal\ToDoCal\Data\task.json", SerializedNotes);
+            File.WriteAllText(path, SerializedNotes);
 
         }
 
         public static void SaveNoteToFile(List<Note> notes)
         {
             string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(@"C:\Users\Viksy\Source\Repos\fel4stered\ToDoCal\ToDoCal\Data\task.json", SerializedNotes);
+            File.WriteAllText(path, SerializedNotes);
 
         }
         public static void Delete_Note(Note note)
