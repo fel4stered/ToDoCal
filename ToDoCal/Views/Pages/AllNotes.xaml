@@ -44,7 +44,26 @@
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Удалить"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
-                <ListViewItem>ИТЕМ 1</ListViewItem>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <StackPanel Margin="10 0 0 0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <TextBlock FontWeight="Bold"/>
+                                <TextBlock/>
+                            </StackPanel>
+                            <TextBlock Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
             <Button x:Name="HideVisBorderButton" Command="{Binding AddNotePageCommand}" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Cursor="Hand">
                 <Grid>
