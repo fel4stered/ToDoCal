@@ -24,5 +24,10 @@ namespace ToDoCal.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AllNotes());
+        }
     }
 }
