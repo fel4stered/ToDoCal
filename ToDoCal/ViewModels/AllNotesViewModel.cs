@@ -15,12 +15,14 @@ namespace ToDoCal.ViewModels
     public class AllNotesViewModel
     {
         private readonly PageService _pageService;
-
+        private NoteService NoteService;
+        public  Note SelectNote { get; set; }
         public List<Note> notes { get; set; }
 
-        public AllNotesViewModel(PageService pageService)
+        public AllNotesViewModel(PageService pageService, NoteService  noteService)
         {
             _pageService = pageService;
+            NoteService = noteService;
             UpdateNotes();
         }
 
@@ -46,6 +48,7 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
+                    NoteService.Note = SelectNote;
                     SelectedNotePage();
                 });
             }
