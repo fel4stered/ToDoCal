@@ -31,10 +31,10 @@
             </Button>
             <StackPanel Grid.Column="0" Margin="0 0 0 0" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Right">
                 
-                <TextBox x:Name="TitleTextBox" Text="Название" FontSize="24" IsReadOnly="True"  PreviewMouseDoubleClick="TitleTextBox_PreviewMouseDoubleClick">
+                <TextBox x:Name="TitleTextBox" Text="{Binding DisplayTitle}" FontSize="24" IsReadOnly="True"  PreviewMouseDoubleClick="TitleTextBox_PreviewMouseDoubleClick">
                 </TextBox>
-                <DatePickerTextBox x:Name="DateTextBox" IsReadOnly="True"  Text="24.03.2023" PreviewMouseDoubleClick="DateTextBox_PreviewMouseDoubleClick"/>
-                <TextBlock x:Name="StatusTextBlock" Text=""/>
+                <DatePickerTextBox x:Name="DateTextBox" IsReadOnly="True"  Text="{Binding DisplayDate}" PreviewMouseDoubleClick="DateTextBox_PreviewMouseDoubleClick"/>
+                <TextBlock x:Name="StatusTextBlock" Text="{Binding DisplayIsTask}" />
                 <ComboBox Style="{StaticResource ComboBoxHiddenTrigger}" SelectedIndex="0" >
                     <ComboBoxItem>В процессе</ComboBoxItem>
                     <ComboBoxItem>Выполнено</ComboBoxItem>
@@ -43,7 +43,7 @@
             </StackPanel>
             <Rectangle Grid.Row="1" Grid.Column="0" Fill="#9E30C5" Height="3"/>
             <Rectangle Grid.RowSpan="4" Grid.Column="1" Fill="#9E30C5" Width="10"/>
-            <TextBox x:Name="DescriptionTextBox" IsReadOnly="True" Margin="0 10 0 0" Grid.Row="2" Grid.Column="0" Text="ТЕКСТ ЗАМЕТКИ" PreviewMouseDoubleClick="DescriptionTextBox_PreviewMouseDoubleClick"/>
+            <TextBox x:Name="DescriptionTextBox" IsReadOnly="True" Margin="0 10 0 0" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayText}" PreviewMouseDoubleClick="DescriptionTextBox_PreviewMouseDoubleClick"/>
             <Button Style="{StaticResource ButtonStyle}" Content="Изменить заметку" IsEnabled="False" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Border>
