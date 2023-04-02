@@ -40,7 +40,20 @@ namespace ToDoCal.Models
             List<Note> notes = JsonConvert.DeserializeObject<List<Note>>(filedata);
             return notes;
         }
-      
+        public static List<Note> GetDateNotes(string date)
+        {
+            List<Note> notestodate = new List<Note>();
+            List<Note> notes = GetNotesFromFile();
+            foreach (Note note in notes)
+            {
+                if (note.Date == date)
+                {
+                    notestodate.Add(note);
+                }
+            }
+            return notestodate;
+        }
+
         public static void SaveNoteToFile(Note note)
         {
             List<Note>notes = GetNotesFromFile();
