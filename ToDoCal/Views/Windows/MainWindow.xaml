@@ -25,7 +25,7 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-        <Border x:Name="BorderLeft" Visibility="Hidden" CornerRadius="20 0 0 20" Grid.Column="0" Background="#9E30C5" IsVisibleChanged="BorderLeft_IsVisibleChanged">
+        <Border x:Name="BorderLeft" Visibility="Hidden" CornerRadius="20 0 0 20" Grid.Column="0" Background="#9E30C5" >
             <Frame x:Name="FramePage" Content="{Binding PageSource}" NavigationUIVisibility="Hidden"/>
         </Border>
         <Border x:Name="BorderRight" CornerRadius="20" Grid.Column="1" Background="White">

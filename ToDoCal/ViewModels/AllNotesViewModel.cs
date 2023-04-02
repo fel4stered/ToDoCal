@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ToDoCal.Models;
 using ToDoCal.Services;
 using ToDoCal.Views;
 using ToDoCal.Views.Pages;
@@ -15,10 +16,17 @@ namespace ToDoCal.ViewModels
     {
         private readonly PageService _pageService;
 
+        public List<Note> notes { get; set; }
 
         public AllNotesViewModel(PageService pageService)
         {
             _pageService = pageService;
+            UpdateNotes();
+        }
+
+        public void UpdateNotes()
+        {
+            notes = Note.GetNotesFromFile();
         }
 
         public ICommand AddNotePageCommand

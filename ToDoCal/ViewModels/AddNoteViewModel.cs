@@ -19,6 +19,7 @@ namespace ToDoCal.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string TypeNote { get; set; }
+        public DateTime DateSelect { get; set; } = DateTime.Now;
         public AddNoteViewModel(PageService pageService)
         {
             _pageService = pageService;
@@ -33,7 +34,7 @@ namespace ToDoCal.ViewModels
                     note.Id = Note.Get_Id_To_New() + 1;
                     note.Name = Title;
                     note.Description = Description;
-                    note.Date = DateTime.Now.ToShortDateString();
+                    note.Date = DateSelect.ToShortDateString();
                     if(TypeNote == "Задача") 
                     {
                         note.Is_Task = true;
