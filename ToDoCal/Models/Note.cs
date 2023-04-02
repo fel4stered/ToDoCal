@@ -18,10 +18,25 @@ namespace ToDoCal.Models
         public string Date { get; set; }
         public bool Is_Task { get; set; } // Является ли задачей 
         public string Stat_Task { get; set; }
-        private static string path { get; set; } = @"Data/task.json";
+        private static string path { get; set; } = @$"{Path.GetTempPath()}ToDoCal\task.json";
 
+        public static void CreateFileIfNotExist()
+        {
+            string TempFolderPath = Path.GetTempPath();
+            string FullPathToDirecrory = Path.Combine(TempFolderPath, "ToDoCal");
+            string FullPathToFile = Path.Combine(FullPathToDirecrory, "task.json");
+            if (!Directory.Exists(FullPathToDirecrory))
+            {
+                Directory.CreateDirectory(FullPathToDirecrory);
+                File.WriteAllText(FullPathToFile, "[]");
+
+            }
+
+            
+        }
         public static List<Note> GetNotesFromFile()
         {
+            CreateFileIfNotExist();
             string filedata = File.ReadAllText(path);
             List<Note> notes = JsonConvert.DeserializeObject<List<Note>>(filedata);
             return notes;
@@ -86,7 +101,7 @@ namespace ToDoCal.Models
         {
             uint count;
             List<Note> notes = GetNotesFromFile();
-            if(notes.Count == 0)
+            if(notes.Count==0)
             {
                 count = 1;
             }
