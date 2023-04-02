@@ -29,7 +29,6 @@ namespace ToDoCal.Models
             {
                 Directory.CreateDirectory(FullPathToDirecrory);
                 File.WriteAllText(FullPathToFile, "[]");
-
             }
 
             

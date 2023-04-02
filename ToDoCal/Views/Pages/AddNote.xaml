@@ -9,13 +9,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="300" FontFamily="bahnschrift"
       Title="AddNote">
-
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.BrowseHome" Executed="CommandBinding_Executed"/>
+    </Page.CommandBindings>
     <Border Background="White" CornerRadius="20 0 0 20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
+            <Button Foreground="#9E30C5" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20,20,0,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" Command="NavigationCommands.BrowseHome">
+                <Grid>
+                    <Path Data="M4,24C4,35.028 12.972,44 24,44 35.028,44 44,35.028 44,24 44,12.972000000000001 35.028,4 24,4 12.972000000000001,4 4,12.972 4,24z M29.061,24.561L21.061,32.561C20.768,32.854 20.384,33 20,33 19.616,33 19.232,32.854 18.939,32.561 18.353,31.975 18.353,31.026 18.939,30.44L25.878,23.501 18.939,16.562C18.353,15.976 18.353,15.027000000000001 18.939,14.441 19.525,13.855 20.474,13.855 21.06,14.441L29.06,22.441000000000003C29.646,23.025,29.646,23.975,29.061,24.561z" HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
+                </Grid>
+            </Button>
             <Rectangle Grid.Column="1" Fill="#9E30C5"/>
             <StackPanel Width="160" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Название заметки:"/>

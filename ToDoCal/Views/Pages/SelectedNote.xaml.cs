@@ -39,5 +39,10 @@ namespace ToDoCal.Views.Pages
         {
             DescriptionTextBox.IsReadOnly = false;
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AllNotes());
+        }
     }
 }
