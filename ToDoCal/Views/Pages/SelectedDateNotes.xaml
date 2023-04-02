@@ -41,7 +41,7 @@
                 <ComboBoxItem>Выполнено</ComboBoxItem>
                 <ComboBoxItem>Брошено</ComboBoxItem>
             </ComboBox>
-            <ListView Style="{DynamicResource ListViewStyle1}" ItemsSource="{Binding notes}" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
+            <ListView Style="{DynamicResource ListViewStyle1}" ItemsSource="{Binding notes}"  MouseDoubleClick="ListView_MouseDoubleClick" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
                 <ListView.ContextMenu>
                     <ContextMenu Style="{StaticResource ContextMenuStyle}">
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="В процессе"/>

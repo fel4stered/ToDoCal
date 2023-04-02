@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ToDoCal.Models;
 using ToDoCal.Services;
+using ToDoCal.Views.Pages;
 
 namespace ToDoCal.ViewModels
 {
@@ -21,6 +23,20 @@ namespace ToDoCal.ViewModels
             _pageService = pageService;
             SelectDate = _pageService.SelectDate;
             notes = Note.GetDateNotes(SelectDate.ToShortDateString()); 
+        }
+        public ICommand SelectedNotePageCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    SelectedNotePage();
+                });
+            }
+        }
+        public void SelectedNotePage()
+        {
+            _pageService.ChangePage(new SelectedNote());
         }
     }
 }
