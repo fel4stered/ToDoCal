@@ -30,10 +30,10 @@
                 </Grid>
             </Button>
             <StackPanel Grid.Column="0" Margin="0 0 0 0" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Right">
-                
-                <TextBox x:Name="TitleTextBox" Text="{Binding DisplayTitle}" FontSize="24" IsReadOnly="True"  PreviewMouseDoubleClick="TitleTextBox_PreviewMouseDoubleClick">
+
+                <TextBox x:Name="TitleTextBox" Text="{Binding DisplayTitle}" FontSize="24" IsReadOnly="True" MaxWidth="230" MaxLength="20" PreviewMouseDoubleClick="TitleTextBox_PreviewMouseDoubleClick">
                 </TextBox>
-                <DatePickerTextBox x:Name="DateTextBox" IsReadOnly="True"  Text="{Binding DisplayDate}" PreviewMouseDoubleClick="DateTextBox_PreviewMouseDoubleClick"/>
+                <DatePickerTextBox x:Name="DateTextBox" IsReadOnly="True"  Text="{Binding DisplayDate}"/>
                 <TextBlock x:Name="StatusTextBlock" Text="{Binding DisplayIsTask}" />
                 <TextBlock  Text="{Binding DisplayStatus}"></TextBlock>
             </StackPanel>
