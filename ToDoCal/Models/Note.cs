@@ -56,10 +56,14 @@ namespace ToDoCal.Models
 
         public static void SaveNoteToFile(Note note)
         {
-            List<Note>notes = GetNotesFromFile();
-            notes.Add(note);
-            string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(path, SerializedNotes);
+            if (Task_On_One_Date(note.Date))
+            {
+                List<Note> notes = GetNotesFromFile();
+                notes.Add(note);
+                string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
+                File.WriteAllText(path, SerializedNotes);
+            }
+           
 
         }
 

@@ -98,8 +98,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null , null , null , "В процесcе");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "В процесcе");
+                        UpdateNotes();
+                    }
+                    
                 });
             }
         }
@@ -109,8 +113,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
+                        UpdateNotes();
+                    }
+                    
 
                 });
             }
@@ -121,8 +129,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "Брошено");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "Брошено");
+                        UpdateNotes();
+                    }
+                    
 
                 });
             }
@@ -133,6 +145,7 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
+                    
                     Note.Delete_Note(SelectNote);
                     UpdateNotes();
 
