@@ -92,6 +92,54 @@ namespace ToDoCal.ViewModels
                 });
             }
         }
+        public ICommand Ch1
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    Note.Edit_Note(SelectNote, null , null , null , "В процесcе");
+                    UpdateNotes();
+
+                });
+            }
+        }
+        public ICommand Ch2
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
+                    UpdateNotes();
+
+                });
+            }
+        }
+        public ICommand Ch3
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    Note.Edit_Note(SelectNote, null, null, null, "Брошено");
+                    UpdateNotes();
+
+                });
+            }
+        }
+        public ICommand Ch4
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    Note.Delete_Note(SelectNote);
+                    UpdateNotes();
+
+                });
+            }
+        }
 
         public ICommand SelectedNotePageCommand
         {

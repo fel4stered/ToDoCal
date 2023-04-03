@@ -72,7 +72,13 @@ namespace ToDoCal.Models
         public static void Delete_Note(Note note)
         {
             List<Note> notes = GetNotesFromFile();
-            notes.Remove(note);
+            foreach (Note delete_note in notes)
+            {
+                if (delete_note.Id == note.Id)
+                {
+                    notes.Remove(delete_note); break;
+                }
+            };
             SaveNoteToFile(notes);
         }
         public static void Edit_Note(Note note,string titleNote, string descriptionNote, string dateNote, string statusNote)
