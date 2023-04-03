@@ -23,6 +23,7 @@ namespace ToDoCal.ViewModels
             _pageService = pageService;
             SelectDate = _pageService.SelectDate;
             notes = Note.GetDateNotes(SelectDate.ToShortDateString()); 
+            
         }
         public ICommand SelectedNotePageCommand
         {
