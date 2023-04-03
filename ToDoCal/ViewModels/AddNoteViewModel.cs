@@ -38,7 +38,7 @@ namespace ToDoCal.ViewModels
                     if(TypeNote == "Задача") 
                     {
                         note.Is_Task = true;
-                        note.Stat_Task = "В процессе";
+                        note.Stat_Task = "В процесcе";
                     }
                     else
                     {
