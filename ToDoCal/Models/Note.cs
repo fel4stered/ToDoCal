@@ -113,7 +113,7 @@ namespace ToDoCal.Models
                     count++;
                 }
             }
-            if (count <= 5)
+            if (count < 5)
             {
                 return true;
             }
