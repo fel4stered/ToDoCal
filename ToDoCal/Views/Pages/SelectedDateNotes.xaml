@@ -41,7 +41,7 @@
                 <ComboBoxItem>Выполнено</ComboBoxItem>
                 <ComboBoxItem>Брошено</ComboBoxItem>
             </ComboBox>
-            <ListView Style="{DynamicResource ListViewStyle1}" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
+            <ListView Style="{DynamicResource ListViewStyle1}" ItemsSource="{Binding notes}"  MouseDoubleClick="ListView_MouseDoubleClick" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
                 <ListView.ContextMenu>
                     <ContextMenu Style="{StaticResource ContextMenuStyle}">
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="В процессе"/>
@@ -50,6 +50,26 @@
                         <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Удалить"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="225" Height="80">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Date}" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <StackPanel Margin="10 0 0 0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
+                                <TextBlock Foreground="DimGray" Text="{Binding Description}"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Stat_Task}" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
         </Border>

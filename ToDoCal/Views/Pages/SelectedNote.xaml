@@ -35,16 +35,12 @@
                 </TextBox>
                 <DatePickerTextBox x:Name="DateTextBox" IsReadOnly="True"  Text="{Binding DisplayDate}" PreviewMouseDoubleClick="DateTextBox_PreviewMouseDoubleClick"/>
                 <TextBlock x:Name="StatusTextBlock" Text="{Binding DisplayIsTask}" />
-                <ComboBox Style="{StaticResource ComboBoxHiddenTrigger}" SelectedIndex="0" >
-                    <ComboBoxItem>В процессе</ComboBoxItem>
-                    <ComboBoxItem>Выполнено</ComboBoxItem>
-                    <ComboBoxItem>Брошено</ComboBoxItem>
-                </ComboBox>
+                <TextBlock  Text="{Binding DisplayStatus}"></TextBlock>
             </StackPanel>
             <Rectangle Grid.Row="1" Grid.Column="0" Fill="#9E30C5" Height="3"/>
             <Rectangle Grid.RowSpan="4" Grid.Column="1" Fill="#9E30C5" Width="10"/>
             <TextBox x:Name="DescriptionTextBox" IsReadOnly="True" Margin="0 10 0 0" Grid.Row="2" Grid.Column="0" Text="{Binding DisplayText}" PreviewMouseDoubleClick="DescriptionTextBox_PreviewMouseDoubleClick"/>
-            <Button Style="{StaticResource ButtonStyle}" Content="Изменить заметку" IsEnabled="False" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Style="{StaticResource ButtonStyle}" Content="Изменить заметку" Command="{Binding AddNotePageCommand}" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Border>
 </Page>
