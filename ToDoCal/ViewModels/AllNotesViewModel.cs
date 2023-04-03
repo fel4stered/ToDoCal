@@ -100,7 +100,6 @@ namespace ToDoCal.ViewModels
                 {
                     Note.Edit_Note(SelectNote, null , null , null , "В процесcе");
                     UpdateNotes();
-
                 });
             }
         }
