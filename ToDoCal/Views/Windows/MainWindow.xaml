@@ -18,7 +18,7 @@
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <tb:TaskbarIcon x:Name="myNotifyIcon" Visibility="Visible" ToolTipText="ToDoCal" PreviewMouseRightButtonDown="myNotifyIcon_PreviewMouseRightButtonDown" Cursor="">
+        <tb:TaskbarIcon x:Name="myNotifyIcon" IconSource="/Resources/icons8_calendar.ico" Visibility="Visible" ToolTipText="ToDoCal" PreviewMouseRightButtonDown="myNotifyIcon_PreviewMouseRightButtonDown" Cursor="">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu BorderThickness="0" Style="{StaticResource ContextMenuStyle}">
                     <MenuItem Header="Выйти" Template="{StaticResource MenuItemTemplate}" Click="Exit_Click"/>
