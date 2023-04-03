@@ -9,26 +9,77 @@ using ToDoCal.Models;
 using ToDoCal.Services;
 using ToDoCal.Views;
 using ToDoCal.Views.Pages;
+using DevExpress;
 
 namespace ToDoCal.ViewModels
 {
-    public class AllNotesViewModel
+    public class AllNotesViewModel : ViewModelBase
     {
         private readonly PageService _pageService;
         private NoteService NoteService;
-        public  Note SelectNote { get; set; }
+        public Note SelectNote { get; set; }
         public List<Note> notes { get; set; }
+        public List<string> CB1 { get; set; } = new List<string> { "Все", "Заметки", "Задачи" };
+        public List<string> CB2 { get; set; } = new List<string> { "Все","В процесcе","Выполнено" ,"Брошено" };
+        public string CB1_item
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value, changedCallback : FiltNote); }
+        }
+        public string CB2_item
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value, changedCallback: FiltNote); }
+        }
+
 
         public AllNotesViewModel(PageService pageService, NoteService  noteService)
         {
             _pageService = pageService;
             NoteService = noteService;
             UpdateNotes();
+           
         }
 
         public void UpdateNotes()
         {
             notes = Note.GetNotesFromFile();
+        }
+        public void FiltNote()
+        {
+            List<Note> notesf = Note.GetNotesFromFile();
+           if (!string.IsNullOrEmpty(CB1_item))
+            {
+               if (CB1_item == "Заметки")
+                {
+                    notesf = notesf.Where(predicate => predicate.Is_Task == false).ToList();
+                }
+               else if (CB1_item == "Задачи")
+                {
+                    notesf = notesf.Where(predicate => predicate.Is_Task == true).ToList();
+                }
+                else { };
+            }
+            if (!string.IsNullOrEmpty(CB2_item))
+            {
+                switch (CB2_item)
+                {
+                    case "Все":
+                        break;
+                    case "В процесcе":
+                        notesf = notesf.Where(predicate => predicate.Stat_Task == CB2_item).ToList();
+                        break;
+                    case "Брошено":
+                        notesf = notesf.Where(predicate => predicate.Stat_Task == CB2_item).ToList();
+                        break;
+                    case "Выполнено":
+                        notesf = notesf.Where(predicate => predicate.Stat_Task == CB2_item).ToList();
+                        break;
+                }
+                
+          
+            }
+            notes = notesf;
         }
 
         public ICommand AddNotePageCommand
