@@ -15,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Data\task.json" />
+    <None Remove="Resources\icons8_calendar.ico" />
     <None Remove="Services\NewFile1.txt" />
+    <None Remove="Views\Windows\icons8_calendar.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,9 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Data\task.json">
+    <Resource Include="Resources\icons8_calendar.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Resource>
   </ItemGroup>
 
 </Project>

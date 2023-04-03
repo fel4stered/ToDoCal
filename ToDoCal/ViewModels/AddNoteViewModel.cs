@@ -43,7 +43,9 @@ namespace ToDoCal.ViewModels
                     else
                     {
                         note.Is_Task = false;
-                        
+                        note.Stat_Task = "";
+
+
                     }
                     Note.SaveNoteToFile(note);
                     _pageService.ChangePage(new AllNotes());
