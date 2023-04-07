@@ -29,12 +29,16 @@
             <Frame x:Name="FramePage" Content="{Binding PageSource}" NavigationUIVisibility="Hidden"/>
         </Border>
         <Border x:Name="BorderRight" CornerRadius="20" Grid.Column="1" Background="White">
-            <Calendar Language="" FirstDayOfWeek="Monday" SelectedDate="{Binding SelectDate}" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="302" Width="420"/>
+            <Calendar x:Name="Cal" Language="" FirstDayOfWeek="Monday" SelectedDate="{Binding SelectDate}" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="302" Width="420"/>
         </Border>
+        
         <Button x:Name="HideVisBorderButton" Foreground="#9E30C5" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" Command="{Binding AddNoteCommand}" Click="HideVisBorderButton_Click">
             <Grid>
                 <Path x:Name="ImageForHideVisBorderButton" Data="M24,44C35.028,44 44,35.028 44,24 44,12.972000000000001 35.028,4 24,4 12.972000000000001,4 4,12.972 4,24 4,35.028 12.972,44 24,44z M17.439,22.439L25.439,14.439C26.025,13.853 26.974,13.853 27.56,14.439 28.145999999999997,15.025 28.145999999999997,15.974 27.56,16.56L20.621,23.5 27.56,30.439C28.145999999999997,31.025 28.145999999999997,31.974 27.56,32.56 27.268,32.854 26.884,33 26.5,33 26.116,33 25.732,32.854 25.439,32.561L17.439,24.561C16.854,23.975,16.854,23.025,17.439,22.439z" HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
             </Grid>
+        </Button>
+        <Button x:Name="Home"  Width="30" Height="30" Margin="40"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" Click="Home_Click" >
+           
         </Button>
     </Grid>
 </Window>
