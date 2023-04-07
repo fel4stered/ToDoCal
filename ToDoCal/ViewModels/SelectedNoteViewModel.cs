@@ -8,6 +8,7 @@ using System.Windows.Input;
 using ToDoCal.Models;
 using ToDoCal.Services;
 using ToDoCal.Views.Pages;
+using System.Text.RegularExpressions;
 
 namespace ToDoCal.ViewModels
 {
@@ -18,6 +19,8 @@ namespace ToDoCal.ViewModels
         public string DisplayStatus { get; set; }
         public string DisplayIsTask { get; set; }
         public string DisplayText { get; set; }
+        public string StartTitle { get; set; }
+        public string StartText { get; set; }
         public Note Note { get; set; }
         private readonly PageService _pageService;
         public SelectedNoteViewModel(NoteService noteService, PageService pageService)
@@ -25,6 +28,8 @@ namespace ToDoCal.ViewModels
             Note = noteService.Note;
             DisplayTitle = Note.Name; DisplayDate = Note.Date;
             DisplayStatus = Note.Stat_Task;
+            StartTitle = Note.Name;
+            StartText = Note.Description;
             if (Note.Is_Task)
             {
                 DisplayIsTask = "Задача";
@@ -47,7 +52,7 @@ namespace ToDoCal.ViewModels
                     else istask = false;
                     Note.Edit_Note(Note, DisplayTitle, DisplayText, DisplayDate, DisplayStatus);
                     _pageService.ChangePage(new AllNotes());
-                });
+                }, bool () => !string.Equals(StartTitle,DisplayTitle) || !string.Equals(StartText,DisplayText) && Regex.IsMatch(DisplayTitle, @"[А-я]") && !string.IsNullOrWhiteSpace(DisplayTitle) && !string.IsNullOrWhiteSpace(DisplayText));
             }
         }
 
