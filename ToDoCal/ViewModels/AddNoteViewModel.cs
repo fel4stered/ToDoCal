@@ -20,9 +20,12 @@ namespace ToDoCal.ViewModels
         public string Description { get; set; }
         public string TypeNote { get; set; }
         public DateTime DateSelect { get; set; } = DateTime.Now;
+        public string TextDate { get; set; }
+        public DateTime result;
         public AddNoteViewModel(PageService pageService)
         {
             _pageService = pageService;
+            TextDate = DateSelect.ToShortDateString();
         }
         public ICommand AddNote
         {
@@ -49,7 +52,7 @@ namespace ToDoCal.ViewModels
                     }
                     Note.SaveNoteToFile(note);
                     _pageService.ChangePage(new AllNotes());
-                });
+                } , bool () => (!string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Description) && DateTime.TryParse(TextDate,out result) ));
             }
         }
 
