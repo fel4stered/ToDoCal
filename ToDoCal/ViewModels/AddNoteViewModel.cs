@@ -9,6 +9,7 @@ using ToDoCal.Models;
 using ToDoCal.Services;
 using ToDoCal.Views;
 using ToDoCal.Views.Pages;
+using System.Text.RegularExpressions;
 
 namespace ToDoCal.ViewModels
 {
@@ -22,13 +23,17 @@ namespace ToDoCal.ViewModels
         public DateTime DateSelect { get; set; } = DateTime.Now;
         public string TextDate { get; set; }
         public DateTime result;
+        public string patern;
         public AddNoteViewModel(PageService pageService)
         {
             _pageService = pageService;
             TextDate = DateSelect.ToShortDateString();
+            patern = @"[А-я]";
+
         }
         public ICommand AddNote
         {
+            
             get
             {
                 return new DelegateCommand(() =>
@@ -52,7 +57,7 @@ namespace ToDoCal.ViewModels
                     }
                     Note.SaveNoteToFile(note);
                     _pageService.ChangePage(new AllNotes());
-                } , bool () => (!string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Description) && DateTime.TryParse(TextDate,out result) ));
+                } , bool () => (!string.IsNullOrWhiteSpace(Title) && Regex.IsMatch(Title,patern) && !string.IsNullOrWhiteSpace(Description) && DateTime.TryParse(TextDate,out result) ));
             }
         }
 
