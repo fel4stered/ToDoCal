@@ -52,7 +52,7 @@ namespace ToDoCal.ViewModels
                     else istask = false;
                     Note.Edit_Note(Note, DisplayTitle, DisplayText, DisplayDate, DisplayStatus);
                     _pageService.ChangePage(new AllNotes());
-                }, bool () => !string.Equals(StartTitle,DisplayTitle) || !string.Equals(StartText,DisplayText) && Regex.IsMatch(DisplayTitle, @"[А-я]") && !string.IsNullOrWhiteSpace(DisplayTitle) && !string.IsNullOrWhiteSpace(DisplayText));
+                }, bool () => !string.Equals(StartTitle,DisplayTitle) || !string.Equals(StartText,DisplayText) && Regex.IsMatch(DisplayTitle, @"[~`!@#$%^&*()+=|\\{}':;.,<>/?[\]""_-]") && !string.IsNullOrWhiteSpace(DisplayTitle) && !string.IsNullOrWhiteSpace(DisplayText));
             }
         }
 
