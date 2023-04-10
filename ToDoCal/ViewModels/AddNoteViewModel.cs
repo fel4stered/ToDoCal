@@ -28,7 +28,7 @@ namespace ToDoCal.ViewModels
         {
             _pageService = pageService;
             TextDate = DateSelect.ToShortDateString();
-            patern = @"[А-я]";
+            patern = @"[~`!@#$%^&*()+=|\\{}':;.,<>/?[\]""_-]";
 
         }
         public ICommand AddNote
@@ -57,7 +57,11 @@ namespace ToDoCal.ViewModels
                     }
                     Note.SaveNoteToFile(note);
                     _pageService.ChangePage(new AllNotes());
-                } , bool () => (!string.IsNullOrWhiteSpace(Title) && Regex.IsMatch(Title,patern) && !string.IsNullOrWhiteSpace(Description) && DateTime.TryParse(TextDate,out result) ));
+                } , bool () => (!string.IsNullOrWhiteSpace(Title) && !Regex.IsMatch(Title, patern) && !string.IsNullOrWhiteSpace(Description) && DateTime.TryParse(TextDate,out result) ));
+                                
+
+
+               
             }
         }
 

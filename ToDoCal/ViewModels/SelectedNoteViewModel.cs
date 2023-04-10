@@ -9,6 +9,8 @@ using ToDoCal.Models;
 using ToDoCal.Services;
 using ToDoCal.Views.Pages;
 using System.Text.RegularExpressions;
+using System.Net.Sockets;
+using System.Windows;
 
 namespace ToDoCal.ViewModels
 {
@@ -44,15 +46,26 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    bool istask;
-                    if (DisplayIsTask == "Задача")
+                    if (MessageBox.Show("Вы точно хотите изменить заметку", "Подтвержение", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        istask = true;
+
+                        bool istask;
+                        if (DisplayIsTask == "Задача")
+                        {
+                            istask = true;
+                        }
+                        else istask = false;
+                        Note.Edit_Note(Note, DisplayTitle, DisplayText, DisplayDate, DisplayStatus);
+                        _pageService.ChangePage(new AllNotes());
                     }
-                    else istask = false;
-                    Note.Edit_Note(Note, DisplayTitle, DisplayText, DisplayDate, DisplayStatus);
-                    _pageService.ChangePage(new AllNotes());
-                }, bool () => !string.Equals(StartTitle,DisplayTitle) || !string.Equals(StartText,DisplayText) && Regex.IsMatch(DisplayTitle, @"[А-я]") && !string.IsNullOrWhiteSpace(DisplayTitle) && !string.IsNullOrWhiteSpace(DisplayText));
+                    else
+                    {
+                        _pageService.ChangePage(new AllNotes());
+
+                    }
+
+
+                }, bool () => !string.Equals(StartTitle,DisplayTitle) || !string.Equals(StartText,DisplayText) && Regex.IsMatch(DisplayTitle, @"[~`!@#$%^&*()+=|\\{}':;.,<>/?[\]""_-]") && !string.IsNullOrWhiteSpace(DisplayTitle) && !string.IsNullOrWhiteSpace(DisplayText));
             }
         }
 

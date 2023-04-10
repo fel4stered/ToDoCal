@@ -27,8 +27,17 @@ namespace ToDoCal.Models
             string FullPathToFile = Path.Combine(FullPathToDirecrory, "task.json");
             if (!Directory.Exists(FullPathToDirecrory))
             {
+                
                 Directory.CreateDirectory(FullPathToDirecrory);
                 File.WriteAllText(FullPathToFile, "[]");
+            }
+            else
+            {
+                if (!File.Exists(FullPathToFile))
+                {
+                    File.WriteAllText(FullPathToFile, "[]");
+                }
+
             }
 
             
@@ -56,10 +65,14 @@ namespace ToDoCal.Models
 
         public static void SaveNoteToFile(Note note)
         {
-            List<Note>notes = GetNotesFromFile();
-            notes.Add(note);
-            string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(path, SerializedNotes);
+            if (Task_On_One_Date(note.Date))
+            {
+                List<Note> notes = GetNotesFromFile();
+                notes.Add(note);
+                string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
+                File.WriteAllText(path, SerializedNotes);
+            }
+           
 
         }
 
@@ -109,7 +122,7 @@ namespace ToDoCal.Models
                     count++;
                 }
             }
-            if (count <= 5)
+            if (count < 5)
             {
                 return true;
             }

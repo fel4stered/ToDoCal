@@ -10,11 +10,15 @@ using ToDoCal.Services;
 using ToDoCal.Views;
 using ToDoCal.Views.Pages;
 using DevExpress;
+using DevExpress.Xpf.Core;
+using DevExpress.Mvvm.UI;
+using System.Windows;
 
 namespace ToDoCal.ViewModels
 {
     public class AllNotesViewModel : ViewModelBase
     {
+
         private readonly PageService _pageService;
         private NoteService NoteService;
         public Note SelectNote { get; set; }
@@ -98,9 +102,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null , null , null , "В процесcе");
-                    UpdateNotes();
-
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "В процесcе");
+                        UpdateNotes();
+                    }
+                    
                 });
             }
         }
@@ -110,8 +117,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
+                        UpdateNotes();
+                    }
+                    
 
                 });
             }
@@ -122,8 +133,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "Брошено");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "Брошено");
+                        UpdateNotes();
+                    }
+                    
 
                 });
             }
@@ -134,8 +149,14 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Delete_Note(SelectNote);
-                    UpdateNotes();
+                    if(MessageBox.Show( "Вы точно хотите удалить заметку", "Подтвержение", MessageBoxButton.YesNo, MessageBoxImage.Information)==MessageBoxResult.Yes)
+                    {
+
+                        Note.Delete_Note(SelectNote);
+                        UpdateNotes();
+                    }
+                    
+
 
                 });
             }

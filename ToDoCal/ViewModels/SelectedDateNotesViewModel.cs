@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ToDoCal.Models;
 using ToDoCal.Services;
@@ -102,8 +103,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "В процесcе");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "В процесcе");
+                        UpdateNotes();
+
+                    }
 
                 });
             }
@@ -114,8 +119,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
+                        UpdateNotes();
+                    }
+                    
 
                 });
             }
@@ -126,8 +135,12 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Edit_Note(SelectNote, null, null, null, "Брошено");
-                    UpdateNotes();
+                    if (SelectNote.Is_Task)
+                    {
+                        Note.Edit_Note(SelectNote, null, null, null, "Брошено");
+                        UpdateNotes();
+                    }
+                    
 
                 });
             }
@@ -138,8 +151,13 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Note.Delete_Note(SelectNote);
-                    UpdateNotes();
+                    if (MessageBox.Show("Вы точно хотите удалить заметку", "Подтвержение", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+
+                        Note.Delete_Note(SelectNote);
+                        UpdateNotes();
+                    }
+
 
                 });
             }
