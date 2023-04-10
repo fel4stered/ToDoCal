@@ -110,5 +110,10 @@ namespace ToDoCal
         {
             this.Close();
         }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            Cal.DisplayDate = DateTime.Now;
+        }
     }
 }
