@@ -27,8 +27,17 @@ namespace ToDoCal.Models
             string FullPathToFile = Path.Combine(FullPathToDirecrory, "task.json");
             if (!Directory.Exists(FullPathToDirecrory))
             {
+                
                 Directory.CreateDirectory(FullPathToDirecrory);
                 File.WriteAllText(FullPathToFile, "[]");
+            }
+            else
+            {
+                if (!File.Exists(FullPathToFile))
+                {
+                    File.WriteAllText(FullPathToFile, "[]");
+                }
+
             }
 
             
