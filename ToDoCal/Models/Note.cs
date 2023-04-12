@@ -18,21 +18,61 @@ namespace ToDoCal.Models
         public string Date { get; set; }
         public bool Is_Task { get; set; } // Является ли задачей 
         public string Stat_Task { get; set; }
-        private static string path { get; set; } = @"Data/task.json";
+        private static string path { get; set; } = @$"{Path.GetTempPath()}ToDoCal\task.json";
 
+        public static void CreateFileIfNotExist()
+        {
+            string TempFolderPath = Path.GetTempPath();
+            string FullPathToDirecrory = Path.Combine(TempFolderPath, "ToDoCal");
+            string FullPathToFile = Path.Combine(FullPathToDirecrory, "task.json");
+            if (!Directory.Exists(FullPathToDirecrory))
+            {
+                
+                Directory.CreateDirectory(FullPathToDirecrory);
+                File.WriteAllText(FullPathToFile, "[]");
+            }
+            else
+            {
+                if (!File.Exists(FullPathToFile))
+                {
+                    File.WriteAllText(FullPathToFile, "[]");
+                }
+
+            }
+
+            
+        }
         public static List<Note> GetNotesFromFile()
         {
+            CreateFileIfNotExist();
             string filedata = File.ReadAllText(path);
             List<Note> notes = JsonConvert.DeserializeObject<List<Note>>(filedata);
             return notes;
         }
-      
+        public static List<Note> GetDateNotes(string date)
+        {
+            List<Note> notestodate = new List<Note>();
+            List<Note> notes = GetNotesFromFile();
+            foreach (Note note in notes)
+            {
+                if (note.Date == date)
+                {
+                    notestodate.Add(note);
+                }
+            }
+            return notestodate;
+        }
+
         public static void SaveNoteToFile(Note note)
         {
-            List<Note>notes = GetNotesFromFile();
-            notes.Add(note);
-            string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
-            File.WriteAllText(path, SerializedNotes);
+            if (Task_On_One_Date(note.Date))
+            {
+                List<Note> notes = GetNotesFromFile();
+                notes.Add(note);
+                string SerializedNotes = JsonConvert.SerializeObject(notes, Formatting.Indented);
+                File.WriteAllText(path, SerializedNotes);
+            }
+           
 
         }
 
@@ -45,7 +85,13 @@ namespace ToDoCal.Models
         public static void Delete_Note(Note note)
         {
             List<Note> notes = GetNotesFromFile();
-            notes.Remove(note);
+            foreach (Note delete_note in notes)
+            {
+                if (delete_note.Id == note.Id)
+                {
+                    notes.Remove(delete_note); break;
+                }
+            };
             SaveNoteToFile(notes);
         }
         public static void Edit_Note(Note note,string titleNote, string descriptionNote, string dateNote, string statusNote)
@@ -76,7 +122,7 @@ namespace ToDoCal.Models
                     count++;
                 }
             }
-            if (count <= 5)
+            if (count < 5)
             {
                 return true;
             }
@@ -86,7 +132,7 @@ namespace ToDoCal.Models
         {
             uint count;
             List<Note> notes = GetNotesFromFile();
-            if(notes.Count == 0)
+            if(notes.Count==0)
             {
                 count = 1;
             }

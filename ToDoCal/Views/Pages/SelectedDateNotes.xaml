@@ -9,7 +9,9 @@
       DataContext="{Binding SelectedDateNotesViewModel, Source={StaticResource ViewModelLocator}}"
       d:DesignHeight="450" d:DesignWidth="300" FontFamily="bahnschrift"
       Title="SelectedDateNotes">
-
+    <Page.CommandBindings>
+        <CommandBinding Command="NavigationCommands.BrowseHome" Executed="CommandBinding_Executed"/>
+    </Page.CommandBindings>
     <Border Background="#9E30C5" CornerRadius="20 0 0 20">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -22,27 +24,47 @@
                 <RowDefinition Height="300"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Button Foreground="White" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20,20,0,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" Command="NavigationCommands.BrowseHome">
+                <Grid>
+                    <Path Data="M4,24C4,35.028 12.972,44 24,44 35.028,44 44,35.028 44,24 44,12.972000000000001 35.028,4 24,4 12.972000000000001,4 4,12.972 4,24z M29.061,24.561L21.061,32.561C20.768,32.854 20.384,33 20,33 19.616,33 19.232,32.854 18.939,32.561 18.353,31.975 18.353,31.026 18.939,30.44L25.878,23.501 18.939,16.562C18.353,15.976 18.353,15.027000000000001 18.939,14.441 19.525,13.855 20.474,13.855 21.06,14.441L29.06,22.441000000000003C29.646,23.025,29.646,23.975,29.061,24.561z" HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
+                </Grid>
+            </Button>
             <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="24" Text="{Binding SelectDateFormater}"/>
-            <ComboBox x:Name="TypeComboBox" SelectedIndex="0" Style="{StaticResource ComboBoxFlatStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0">
-                <ComboBoxItem>Все</ComboBoxItem>
-                <ComboBoxItem>Заметки</ComboBoxItem>
-                <ComboBoxItem>Задачи</ComboBoxItem>
+            <ComboBox x:Name="TypeComboBox" SelectedIndex="0" Style="{StaticResource ComboBoxFlatStyle}" ItemsSource="{Binding CB1}" SelectedItem="{Binding CB1_item}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0">
+               
             </ComboBox>
-            <ComboBox Style="{StaticResource ComboBoxHiddenTrigger}" SelectedIndex="0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0">
-                <ComboBoxItem>Все</ComboBoxItem>
-                <ComboBoxItem>В процессе</ComboBoxItem>
-                <ComboBoxItem>Выполнено</ComboBoxItem>
-                <ComboBoxItem>Брошено</ComboBoxItem>
+            <ComboBox Style="{StaticResource ComboBoxHiddenTrigger}" ItemsSource="{Binding CB2}" SelectedItem="{Binding CB2_item}" SelectedIndex="0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0">
+               
             </ComboBox>
-            <ListView Style="{DynamicResource ListViewStyle1}" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
+            <ListView Style="{DynamicResource ListViewStyle1}" ItemsSource="{Binding notes}" SelectedItem="{Binding SelectNote}"  MouseDoubleClick="ListView_MouseDoubleClick" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 20 0">
                 <ListView.ContextMenu>
                     <ContextMenu Style="{StaticResource ContextMenuStyle}">
-                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="В процессе"/>
-                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Выполнено"/>
-                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Брошено"/>
-                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Удалить"/>
+                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="В процессе" Command="{Binding Ch1}"/>
+                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Выполнено" Command="{Binding Ch2}"/>
+                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Брошено" Command="{Binding Ch3}"/>
+                        <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Удалить" Command="{Binding Ch4}"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="225" Height="80">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Date}" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <StackPanel Margin="10 0 0 0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
+                                <TextBlock Foreground="DimGray" Text="{Binding Description}"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Stat_Task}" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
         </Border>

@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\icons8_calendar.ico" />
     <None Remove="Services\NewFile1.txt" />
+    <None Remove="Views\Windows\icons8_calendar.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,12 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\icons8_calendar.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

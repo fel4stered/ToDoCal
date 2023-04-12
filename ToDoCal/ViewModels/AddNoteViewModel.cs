@@ -9,6 +9,7 @@ using ToDoCal.Models;
 using ToDoCal.Services;
 using ToDoCal.Views;
 using ToDoCal.Views.Pages;
+using System.Text.RegularExpressions;
 
 namespace ToDoCal.ViewModels
 {
@@ -20,12 +21,19 @@ namespace ToDoCal.ViewModels
         public string Description { get; set; }
         public string TypeNote { get; set; }
         public DateTime DateSelect { get; set; } = DateTime.Now;
+        public string TextDate { get; set; }
+        public DateTime result;
+        public string patern;
         public AddNoteViewModel(PageService pageService)
         {
             _pageService = pageService;
+            TextDate = DateSelect.ToShortDateString();
+            patern = @"[~`!@#$%^&*()+=|\\{}':;.,<>/?[\]""_-]";
+
         }
         public ICommand AddNote
         {
+            
             get
             {
                 return new DelegateCommand(() =>
@@ -38,16 +46,22 @@ namespace ToDoCal.ViewModels
                     if(TypeNote == "Задача") 
                     {
                         note.Is_Task = true;
-                        note.Stat_Task = "В процессе";
+                        note.Stat_Task = "В процесcе";
                     }
                     else
                     {
                         note.Is_Task = false;
-                        
+                        note.Stat_Task = "";
+
+
                     }
                     Note.SaveNoteToFile(note);
                     _pageService.ChangePage(new AllNotes());
-                });
+                } , bool () => (!string.IsNullOrWhiteSpace(Title) && !Regex.IsMatch(Title, patern) && !string.IsNullOrWhiteSpace(Description) && DateTime.TryParse(TextDate,out result) ));
+                                
+
+
+               
             }
         }
 

@@ -458,7 +458,7 @@
     <SolidColorBrush x:Key="DefaultButton.MouseOver.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="DefaultButton.Pressed.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="DefaultButton.Pressed.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="DefaultButton.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="DefaultButton.Disabled.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="DefaultButton.Disabled.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="DefaultButton.Disabled.Foreground" Color="#FF838383"/>
     <!--#endregion-->

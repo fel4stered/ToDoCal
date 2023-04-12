@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDoCal.Views.Pages;
 
 namespace ToDoCal.Views
 {
@@ -23,6 +24,11 @@ namespace ToDoCal.Views
         public AddNote()
         {
             InitializeComponent();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AllNotes());
         }
     }
 }

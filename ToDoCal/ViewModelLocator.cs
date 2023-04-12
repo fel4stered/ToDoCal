@@ -26,6 +26,8 @@ namespace ToDoCal
             services.AddTransient<SelectedNoteViewModel>();
 
             services.AddSingleton<PageService>();
+            services.AddSingleton<NoteService>();
+            
 
             _provider = services.BuildServiceProvider();
         }
