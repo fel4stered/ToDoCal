@@ -23,52 +23,6 @@ namespace ToDoCal
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region AltTab
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr window, int index, int value);
-
-        [DllImport("user32.dll")]
-        private static extern int GetWindowLong(IntPtr window, int index);
-
-        private const int GWL_EXSTYLE = -20;
-        private const int WS_EX_TOOLWINDOW = 0x00000080;
-
-        public static void HideFromAltTab(IntPtr Handle)
-        {
-            SetWindowLong(Handle, GWL_EXSTYLE, GetWindowLong(Handle, GWL_EXSTYLE) | WS_EX_TOOLWINDOW);
-        }
-        private IntPtr Handle
-        {
-            get
-            {
-                return new WindowInteropHelper(this).Handle;
-            }
-        }
-
-        [DllImport("user32.dll")]
-        public static extern bool SetWindowPos(int hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
-
-        public const int HWND_BOTTOM = 0x1;
-        public const uint SWP_NOSIZE = 0x1;
-        public const uint SWP_NOMOVE = 0x2;
-        public const uint SWP_SHOWWINDOW = 0x40;
-
-        private void ShoveToBackground()
-        {
-            SetWindowPos((int)this.Handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            HideFromAltTab(Handle);
-        }
-
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            ShoveToBackground();
-        }
-        #endregion
-
         public MainWindow()
         {
             InitializeComponent();
@@ -76,7 +30,14 @@ namespace ToDoCal
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left) this.DragMove();
+            if (!fix)
+            {
+                if (e.ChangedButton == MouseButton.Left) this.DragMove();
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         #region HideVisBorderButtonPropertyChange
@@ -114,6 +75,43 @@ namespace ToDoCal
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             Cal.DisplayDate = DateTime.Now;
+        }
+
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        private const int GWL_EX_STYLE = -20;
+        private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
+
+        bool fix = false;
+        private void FixButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!fix)
+            {
+                
+                ImageForFixButton.Data = Geometry.Parse("M14.707031,2.2929688L13.292969,3.7070312 14.388672,4.8027344 8.1894531,9.7753906 6.7070312,8.2929688 5.2929688,9.7070312 9.09375,13.507812 3,19.599609 3,21 4.4003906,21 10.492188,14.90625 14.292969,18.707031 15.707031,17.292969 14.310547,15.896484 19.214844,9.6289062 20.292969,10.707031 21.707031,9.2929688 14.707031,2.2929688z");
+                fix = true;
+            }
+            else
+            {
+                ImageForFixButton.Data = Geometry.Parse("M14.707031,2.2929688L13.292969,3.7070312 14.388672,4.8027344 8.1894531,9.7753906 6.7070312,8.2929688 5.2929688,9.7070312 9.09375,13.507812 3,19.599609 3,21 4.4003906,21 10.492188,14.90625 14.292969,18.707031 15.707031,17.292969 14.310547,15.896484 19.214844,9.6289062 20.292969,10.707031 21.707031,9.2929688 14.707031,2.2929688z M15.798828,6.2363281L17.779297,8.2167969 12.976562,14.359375 9.7246094,11.107422 15.798828,6.2363281z");
+                fix = false;
+            }
+        }
+
+        void FormLoaded(object sender, RoutedEventArgs args)
+        {
+            //Variable to hold the handle for the form
+            var helper = new WindowInteropHelper(this).Handle;
+            //Performing some magic to hide the form from Alt+Tab
+            SetWindowLong(helper, GWL_EX_STYLE, (GetWindowLong(helper, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
+
         }
     }
 }

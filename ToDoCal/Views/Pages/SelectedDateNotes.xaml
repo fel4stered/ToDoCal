@@ -58,8 +58,8 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Date}" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
                             <StackPanel Margin="10 0 0 0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
-                                <TextBlock Foreground="DimGray" Text="{Binding Description}"/>
+                                <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Height="50" Foreground="DimGray" Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                             </StackPanel>
                             <TextBlock Text="{Binding Stat_Task}" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
                         </Grid>
