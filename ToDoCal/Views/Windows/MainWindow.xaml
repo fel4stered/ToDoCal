@@ -11,13 +11,25 @@
         mc:Ignorable="d"
         Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize"
         FontFamily="bahnschrift" WindowStyle="None"
-        Title="MainWindow" Height="450" Width="800">
-    
+        ShowInTaskbar="False"
+        Title="MainWindow" Height="450" Width="800" Loaded="FormLoaded">
+
     <Grid MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <Border x:Name="BorderRight" CornerRadius="20" Grid.Column="1" Background="White">
+            <Calendar x:Name="Cal" Language="" FirstDayOfWeek="Monday" SelectedDate="{Binding SelectDate}" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="302" Width="420"/>
+        </Border>
+
+        <Button x:Name="FixButton" Foreground="#9E30C5" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="Hand" Click="FixButton_Click">
+            <Grid>
+                <Path x:Name="ImageForFixButton" Data="M14.707031,2.2929688L13.292969,3.7070312 14.388672,4.8027344 8.1894531,9.7753906 6.7070312,8.2929688 5.2929688,9.7070312 9.09375,13.507812 3,19.599609 3,21 4.4003906,21 10.492188,14.90625 14.292969,18.707031 15.707031,17.292969 14.310547,15.896484 19.214844,9.6289062 20.292969,10.707031 21.707031,9.2929688 14.707031,2.2929688z M15.798828,6.2363281L17.779297,8.2167969 12.976562,14.359375 9.7246094,11.107422 15.798828,6.2363281z" HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
+            </Grid>
+        </Button>
+
         <tb:TaskbarIcon x:Name="myNotifyIcon" IconSource="/Resources/icons8_calendar.ico" Visibility="Visible" ToolTipText="ToDoCal" PreviewMouseRightButtonDown="myNotifyIcon_PreviewMouseRightButtonDown" Cursor="">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu BorderThickness="0" Style="{StaticResource ContextMenuStyle}">
@@ -28,10 +40,7 @@
         <Border x:Name="BorderLeft" Visibility="Hidden" CornerRadius="20 0 0 20" Grid.Column="0" Background="#9E30C5" IsVisibleChanged="BorderLeft_IsVisibleChanged">
             <Frame x:Name="FramePage" Content="{Binding PageSource}" NavigationUIVisibility="Hidden"/>
         </Border>
-        <Border x:Name="BorderRight" CornerRadius="20" Grid.Column="1" Background="White">
-            <Calendar x:Name="Cal" Language="" FirstDayOfWeek="Monday" SelectedDate="{Binding SelectDate}" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="302" Width="420"/>
-        </Border>
-        
+
         <Button x:Name="HideVisBorderButton" Foreground="#9E30C5" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" Command="{Binding AddNoteCommand}" Click="HideVisBorderButton_Click">
             <Grid>
                 <Path x:Name="ImageForHideVisBorderButton" Data="M24,44C35.028,44 44,35.028 44,24 44,12.972000000000001 35.028,4 24,4 12.972000000000001,4 4,12.972 4,24 4,35.028 12.972,44 24,44z M17.439,22.439L25.439,14.439C26.025,13.853 26.974,13.853 27.56,14.439 28.145999999999997,15.025 28.145999999999997,15.974 27.56,16.56L20.621,23.5 27.56,30.439C28.145999999999997,31.025 28.145999999999997,31.974 27.56,32.56 27.268,32.854 26.884,33 26.5,33 26.116,33 25.732,32.854 25.439,32.561L17.439,24.561C16.854,23.975,16.854,23.025,17.439,22.439z" HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
@@ -40,8 +49,7 @@
 
         <Button Foreground="#000" BorderBrush="Transparent" Template="{StaticResource DefaultbuttonTemplate}" Background="Transparent" Width="30" Height="30" Margin="20" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand" Click="Home_Click">
             <Grid>
-                <Path Data="M352.817 746Q312 746 284 717.817q-28-28.183-28-69T284.183 580q28.183-28 69-28T422 580.183q28 28.183 28 69T421.817 718q-28.183 28-69 28ZM180 976q-24 0-42-18t-18-42V296q0-24 18-42t42-18h65v-60h65v60h340v-60h65v60h65q24 0 42 18t18 42v620q0 24-18 42t-42 18H180Zm0-60h600V486H180v430Zm0-490h600V296H180v130Zm0 0V296v130Z
-"  HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
+                <Path Data="M352.817 746Q312 746 284 717.817q-28-28.183-28-69T284.183 580q28.183-28 69-28T422 580.183q28 28.183 28 69T421.817 718q-28.183 28-69 28ZM180 976q-24 0-42-18t-18-42V296q0-24 18-42t42-18h65v-60h65v60h340v-60h65v60h65q24 0 42 18t18 42v620q0 24-18 42t-42 18H180Zm0-60h600V486H180v430Zm0-490h600V296H180v130Zm0 0V296v130Z "  HorizontalAlignment="Left" Height="25" Stretch="Fill" VerticalAlignment="Center" Width="25" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}"/>
             </Grid>
         </Button>
     </Grid>
