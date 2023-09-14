@@ -28,7 +28,7 @@
                 <TextBlock Text="Название заметки:"/>
                 <TextBox MaxLength="20" Style="{StaticResource TextBoxStyle}" Text="{Binding Title , UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Margin="0 5 0 0" Text="Текст заметки:"/>
-                <TextBox Width="160" ScrollViewer.VerticalScrollBarVisibility="Auto" MaxHeight="60" MaxLength="255" TextWrapping="Wrap" Style="{StaticResource TextBoxStyle}" Text="{Binding Description , UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="160" ScrollViewer.VerticalScrollBarVisibility="Auto" MaxHeight="120" MaxLength="255" TextWrapping="Wrap" AcceptsReturn="True" Style="{StaticResource TextBoxStyle}" Text="{Binding Description , UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Margin="0 5 0 5" Text="Тип:"/>
                 <ComboBox Style="{StaticResource ComboBoxFlatStyle}" SelectedIndex="0" Text="{Binding TypeNote}" >
                     <ComboBoxItem>Заметка</ComboBoxItem>

@@ -102,7 +102,7 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    if (SelectNote.Is_Task)
+                    if (SelectNote is not null && SelectNote.Is_Task)
                     {
                         Note.Edit_Note(SelectNote, null, null, null, "В процесcе");
                         UpdateNotes();
@@ -117,7 +117,7 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    if (SelectNote.Is_Task)
+                    if (SelectNote is not null && SelectNote.Is_Task)
                     {
                         Note.Edit_Note(SelectNote, null, null, null, "Выполнено");
                         UpdateNotes();
@@ -133,7 +133,7 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    if (SelectNote.Is_Task)
+                    if (SelectNote is not null && SelectNote.Is_Task)
                     {
                         Note.Edit_Note(SelectNote, null, null, null, "Брошено");
                         UpdateNotes();
@@ -149,7 +149,7 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    if(MessageBox.Show( "Вы точно хотите удалить заметку", "Подтвержение", MessageBoxButton.YesNo, MessageBoxImage.Information)==MessageBoxResult.Yes)
+                    if(SelectNote is not null && MessageBox.Show( "Вы точно хотите удалить заметку", "Подтвержение", MessageBoxButton.YesNo, MessageBoxImage.Information)==MessageBoxResult.Yes)
                     {
 
                         Note.Delete_Note(SelectNote);
@@ -168,8 +168,11 @@ namespace ToDoCal.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    NoteService.Note = SelectNote;
-                    SelectedNotePage();
+                    if (SelectNote is not null)
+                    {
+                        NoteService.Note = SelectNote;
+                        SelectedNotePage();
+                    }
                 });
             }
         }
